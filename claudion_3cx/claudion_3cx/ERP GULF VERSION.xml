@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<Crm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Country="US" Name="ERP GULF VERSION" Version="1" SupportsEmojis="true">
+  <Number Prefix="AsIs" MaxLength="[MaxLength]" />
+  <Connection MaxConcurrentRequests="2" />
+  <Parameters>
+    <Parameter Name="ReportCallEnabled" Type="Boolean" Editor="String" Title="Enable Call Journaling" Default="False" />
+    <Parameter Name="Subject" Type="String" Parent="ReportCallEnabled" Editor="String" Title="Call Subject:" Default="3CX PhoneSystem Call" />
+    <Parameter Name="InboundCallText" Type="String" Parent="ReportCallEnabled" Editor="String" Title="Answered Inbound Call:" Default="[DateTime]: Answered incoming call from [Number] to [Agent] ([Duration])" />
+    <Parameter Name="MissedCallText" Type="String" Parent="ReportCallEnabled" Editor="String" Title="Missed Call:" Default="[DateTime]: Missed call from [Number] to [Agent]" />
+    <Parameter Name="OutboundCallText" Type="String" Parent="ReportCallEnabled" Editor="String" Title="Answered Outbound Call:" Default="[DateTime]: Answered outgoing call from [Agent] to [Number] ([Duration])" />
+    <Parameter Name="NotAnsweredOutboundCallText" Type="String" Parent="ReportCallEnabled" Editor="String" Title="Unanswered Outbound Call:" Default="[DateTime]: Unanswered outgoing call from [Agent] to [Number]" />
+  </Parameters>
+  <Authentication Type="No" />
+  <Scenarios>
+    <Scenario Id="" Type="REST">
+      <Request Url="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?tax_id=587" MessagePasses="0" RequestEncoding="UrlEncoded" RequestType="Get" ResponseType="Json" />
+      <Rules>
+        <Rule Type="Any">593</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID" Path="593">
+          <Filter />
+        </Variable>
+        <Variable Name="FirstName" Path="Husna">
+          <Filter />
+        </Variable>
+        <Variable Name="LastName" Path="M">
+          <Filter />
+        </Variable>
+        <Variable Name="CompanyName" Path="ERP GULF ">
+          <Filter />
+        </Variable>
+        <Variable Name="Email" Path="husna@htsqatar.com">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneBusiness" Path="7306204060">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneMobile" Path="7306204060">
+          <Filter />
+        </Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactID" Passes="0" Value="[ContactID]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="ContactUrl" Passes="0" Value="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="LookupByEmail" Type="REST">
+      <Request Url="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestEncoding="UrlEncoded" RequestType="Get" ResponseType="Json" />
+      <Rules>
+        <Rule Type="Any">593</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID" Path="593">
+          <Filter />
+        </Variable>
+        <Variable Name="FirstName" Path="Husna">
+          <Filter />
+        </Variable>
+        <Variable Name="LastName" Path="M">
+          <Filter />
+        </Variable>
+        <Variable Name="CompanyName" Path="ERP GULF ">
+          <Filter />
+        </Variable>
+        <Variable Name="Email" Path="husna@htsqatar.com">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneBusiness" Path="7306204060">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneMobile" Path="7306204060">
+          <Filter />
+        </Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactID" Passes="0" Value="[ContactID]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="ContactUrl" Passes="0" Value="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="ReportCall" Type="REST">
+      <Request SkipIf="[IIf([ReportCallEnabled]!=True||[EntityId]==&quot;&quot;,True,[IIf([CallType]!=Inbound,True,False)])]" Url="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestContentType="application/json" RequestEncoding="Json" RequestType="Post" ResponseType="Json">
+        <PostValues Key="">
+          <Value Key="duration" Passes="1" Type="String">[12]</Value>
+          <Value Key="phone" Passes="1" Type="String">[7306204060]</Value>
+        </PostValues>
+      </Request>
+      <Variables />
+      <Outputs Next="ReportCallMissed" AllowEmpty="true" />
+    </Scenario>
+    <Scenario Id="ReportCallMissed" Type="REST">
+      <Request SkipIf="[IIf([ReportCallEnabled]!=True||[EntityId]==&quot;&quot;,True,[IIf([CallType]!=Missed,True,False)])]" Url="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestContentType="application/json" RequestEncoding="Json" RequestType="Post" ResponseType="Json">
+        <PostValues Key="">
+          <Value Key="duration" Passes="1" Type="String">[12]</Value>
+          <Value Key="phone" Passes="1" Type="String">[7306204060]</Value>
+        </PostValues>
+      </Request>
+      <Variables />
+      <Outputs Next="ReportCallOutbound" AllowEmpty="true" />
+    </Scenario>
+    <Scenario Id="ReportCallOutbound" Type="REST">
+      <Request SkipIf="[IIf([ReportCallEnabled]!=True||[EntityId]==&quot;&quot;,True,[IIf([CallType]!=Outbound,True,False)])]" Url="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestContentType="application/json" RequestEncoding="Json" RequestType="Post" ResponseType="Json">
+        <PostValues Key="">
+          <Value Key="duration" Passes="1" Type="String">[12]</Value>
+          <Value Key="phone" Passes="1" Type="String">[7306204060]</Value>
+        </PostValues>
+      </Request>
+      <Variables />
+      <Outputs Next="ReportCallNotanswered" AllowEmpty="true" />
+    </Scenario>
+    <Scenario Id="ReportCallNotanswered" Type="REST">
+      <Request SkipIf="[IIf([ReportCallEnabled]!=True||[EntityId]==&quot;&quot;,True,[IIf([CallType]!=Notanswered,True,False)])]" Url="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestContentType="application/json" RequestEncoding="Json" RequestType="Post" ResponseType="Json">
+        <PostValues Key="">
+          <Value Key="duration" Passes="1" Type="String">[12]</Value>
+          <Value Key="phone" Passes="1" Type="String">[7306204060]</Value>
+        </PostValues>
+      </Request>
+      <Variables />
+      <Outputs AllowEmpty="false" />
+    </Scenario>
+  </Scenarios>
+</Crm>

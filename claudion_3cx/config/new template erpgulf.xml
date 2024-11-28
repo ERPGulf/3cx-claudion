@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<Crm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Country="US" Name="new template erpgulf" Version="1" SupportsEmojis="true">
+  <Number Prefix="AsIs" MaxLength="[MaxLength]" />
+  <Connection MaxConcurrentRequests="2" />
+  <Parameters>
+    <Parameter Name="CreateContactEnabled" Type="Boolean" Editor="String" Title="Enable Contact Creation" Default="False" />
+    <Parameter Name="CreateOnCallDirection" Type="List" Parent="CreateContactEnabled" Editor="String" Title="Create Contacts on Call Direction:" Default="Inbound" ListValues="Inbound,Inbound/Outbound" />
+    <Parameter Name="CreateContactFirstName" Type="String" Parent="CreateContactEnabled" Editor="String" Title="New Contact First Name:" Default="New" />
+    <Parameter Name="CreateContactLastName" Type="String" Parent="CreateContactEnabled" Editor="String" Title="New Contact Last Name:" Default="3CX Contact [Number]" />
+  </Parameters>
+  <Authentication Type="No" />
+  <Scenarios>
+    <Scenario Id="" Type="REST">
+      <Request Url="https://bench7.erpgulf.com:8555/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestEncoding="UrlEncoded" RequestType="Get" ResponseType="Json" />
+      <Rules>
+        <Rule Type="Any">5556</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID" Path="5556">
+          <Filter />
+        </Variable>
+        <Variable Name="FirstName" Path="hikj">
+          <Filter />
+        </Variable>
+        <Variable Name="LastName" Path="mkmkl,l">
+          <Filter />
+        </Variable>
+        <Variable Name="CompanyName" Path="mkml,l">
+          <Filter />
+        </Variable>
+        <Variable Name="Email" Path="husna@.com">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneBusiness" Path="7306204060">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneMobile" Path="7306204060">
+          <Filter />
+        </Variable>
+        <Variable Name="ContactUrl" Path="https://bench7.erpgulf.com:8744/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com">
+          <Filter />
+        </Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactID" Passes="0" Value="[ContactID]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrl]" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="LookupByEmail" Type="REST">
+      <Request Url="https://bench7.erpgulf.com:8666/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestEncoding="UrlEncoded" RequestType="Get" ResponseType="Json" />
+      <Rules>
+        <Rule Type="Any">5556</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID" Path="5556">
+          <Filter />
+        </Variable>
+        <Variable Name="FirstName" Path="hikj">
+          <Filter />
+        </Variable>
+        <Variable Name="LastName" Path="mkmkl,l">
+          <Filter />
+        </Variable>
+        <Variable Name="CompanyName" Path="mkml,l">
+          <Filter />
+        </Variable>
+        <Variable Name="Email" Path="husna@.com">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneBusiness" Path="7306204060">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneMobile" Path="7306204060">
+          <Filter />
+        </Variable>
+        <Variable Name="ContactUrl" Path="https://bench7.erpgulf.com:8744/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com">
+          <Filter />
+        </Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactID" Passes="0" Value="[ContactID]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrl]" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="CreateContactRecord" Type="REST">
+      <Request SkipIf="[CreateContactEnabled]!=True||[IIf([CreateOnCallDirection]==Inbound,[CallDirection]!=Inbound,False)]==True" Url="https://bench7.erpgulf.com:8777/api/method/claudion_3cx.claudion_3cx.calls.crea{te_call?number=7306204060&amp;email=husna@htsqatar.com" MessagePasses="0" RequestContentType="application/json" RequestEncoding="Json" RequestType="Post" ResponseType="Json">
+        <PostValues Key="">
+          <Value Key="firstname" Passes="1" Type="String">[phus]</Value>
+          <Value Key="phone" Passes="1" Type="String">[7306204060]</Value>
+        </PostValues>
+      </Request>
+      <Rules>
+        <Rule Type="Any">521</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID" Path="521">
+          <Filter />
+        </Variable>
+        <Variable Name="CompanyName" Path="r5tgh">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneBusiness" Path="7306204060">
+          <Filter />
+        </Variable>
+        <Variable Name="PhoneMobile" Path="7306204060">
+          <Filter />
+        </Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactID" Passes="0" Value="[ContactID]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="ContactUrl" Passes="0" Value="https://bench7.erpgulf.com:8757/api/method/claudion_3cx.claudion_3cx.calls.create_call?number=7306204060&amp;email=husna@htsqatar.com" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+      </Outputs>
+    </Scenario>
+  </Scenarios>
+</Crm>
